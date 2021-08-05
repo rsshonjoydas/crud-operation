@@ -1,8 +1,9 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField, withStyles } from '@material-ui/core';
 import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/postMessage';
 import useForm from './useForm';
 
 const initialFieldValues = {
@@ -27,7 +28,7 @@ const styles = (theme) => ({
 });
 
 const PostMessageForm = ({ classes, ...props }) => {
-  const { values, setValues, errors, setErrors, handleInputChange } = useForm(initialFieldValues);
+  const { values, errors, setErrors, handleInputChange } = useForm(initialFieldValues);
 
   const validate = () => {
     const temp = { ...errors };
@@ -41,8 +42,11 @@ const PostMessageForm = ({ classes, ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const onSuccess = () => {
+      window.alert('Validation Successful');
+    };
     if (validate()) {
-      alert('Validation Successful');
+      props.createPostMessage(values, onSuccess());
     }
   };
 
@@ -86,4 +90,13 @@ const PostMessageForm = ({ classes, ...props }) => {
   );
 };
 
-export default withStyles(styles)(PostMessageForm);
+const mapStateToProps = (state) => ({
+  postMessageList: state.postMessage.list,
+});
+
+const mapActionToProps = {
+  createPostMessage: actions.create,
+  updatePostMessage: actions.update,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(PostMessageForm));
