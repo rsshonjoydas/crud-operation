@@ -1,5 +1,6 @@
 import { AppBar, Container, Typography } from '@material-ui/core';
 import { Provider } from 'react-redux';
+import PostMessages from './components/PostMessages';
 import store from './store/store';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
             Post Box
           </Typography>
         </AppBar>
+        <PostMessages />
       </Container>
     </Provider>
   );

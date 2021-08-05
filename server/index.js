@@ -36,7 +36,7 @@ const init = async () => {
   app.use(bodyParser.json());
   app.use(cors());
 
-  app.use('/postMessage', postMessageRoute);
+  app.use('/postMessages', postMessageRoute);
 
   app.use('/', (req, res) => {
     res.send('RS Shonjoy' + new Date());
