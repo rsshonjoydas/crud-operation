@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { AppBar, Container, Typography } from '@material-ui/core';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Container maxWidth="lg">
+        <AppBar position="static" color="inherit">
+          <Typography variant="h2" align="center">
+            Post Box
+          </Typography>
+        </AppBar>
+      </Container>
+    </Provider>
   );
 }
 
