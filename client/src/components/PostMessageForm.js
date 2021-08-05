@@ -1,6 +1,7 @@
-/* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, TextField, withStyles } from '@material-ui/core';
+import { AssignmentTurnedIn } from '@material-ui/icons';
+import ButterToast, { Cinnamon } from 'butter-toast';
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/postMessage';
@@ -43,7 +44,16 @@ const PostMessageForm = ({ classes, ...props }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const onSuccess = () => {
-      window.alert('Validation Successful');
+      ButterToast.raise({
+        content: (
+          <Cinnamon.Crisp
+            title="Post Box"
+            content="Submitted Successfully"
+            scheme={Cinnamon.Crisp.SCHEME_PURPLE}
+            icon={<AssignmentTurnedIn />}
+          />
+        ),
+      });
     };
     if (validate()) {
       props.createPostMessage(values, onSuccess());
