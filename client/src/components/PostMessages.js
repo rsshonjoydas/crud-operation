@@ -1,5 +1,6 @@
-/* eslint-disable react/destructuring-assignment */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/no-array-index-key */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Divider,
@@ -9,7 +10,6 @@ import {
   ListItemText,
   Paper,
   Typography,
-  // eslint-disable-next-line prettier/prettier
   withStyles
 } from '@material-ui/core';
 import React, { Fragment, useEffect } from 'react';
