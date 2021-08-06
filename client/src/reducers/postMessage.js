@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { ACTION_TYPES } from '../actions/postMessage';
 
 const initialState = {

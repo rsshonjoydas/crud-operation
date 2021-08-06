@@ -1,9 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-alert */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Divider,
@@ -37,6 +32,7 @@ const styles = (theme) => ({
 
 const PostMessages = ({ classes, ...props }) => {
   const [currentId, setCurrentId] = useState(0);
+  const {deletePostMessage, postMessageList} = props
 
   useEffect(() => {
     props.fetchAllPostMessages();
@@ -56,7 +52,7 @@ const PostMessages = ({ classes, ...props }) => {
       });
     };
     if (window.confirm('Are you sure to delete this record?')) {
-      props.deletePostMessage(id, onSuccess);
+      deletePostMessage(id, onSuccess);
     }
   };
 
@@ -70,8 +66,8 @@ const PostMessages = ({ classes, ...props }) => {
       <Grid item xs={7}>
         <Paper className={classes.paper}>
           <List>
-            {props.postMessageList.map((record, index) => (
-              <Fragment key={index}>
+            {postMessageList.map((record) => (
+              <Fragment key={record._id}>
                 <ListItem>
                   <ListItemText>
                     <Typography variant="h5">{record.title}</Typography>
