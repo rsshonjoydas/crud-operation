@@ -32,13 +32,17 @@ const styles = (theme) => ({
 });
 
 const PostMessageForm = ({ classes, ...props }) => {
-  const { values, setValues, errors, setErrors, handleInputChange } = useForm(initialFieldValues);
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } = useForm(
+    initialFieldValues,
+    props.setCurrentId
+  );
 
   useEffect(() => {
     if (props.currentId !== 0) {
       setValues({
         ...props.postMessageList.find((x) => x._id === props.currentId),
       });
+      setErrors({});
     }
   }, [props.currentId]);
 
@@ -65,6 +69,7 @@ const PostMessageForm = ({ classes, ...props }) => {
           />
         ),
       });
+      resetForm();
     };
     if (validate()) {
       if (props.currentId === 0) {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useForm = (initialFieldValues) => {
+const useForm = (initialFieldValues, setCurrentId) => {
   const [values, setValues] = useState(initialFieldValues);
   const [errors, setErrors] = useState({});
 
@@ -11,12 +11,20 @@ const useForm = (initialFieldValues) => {
       [name]: value,
     });
   };
+
+  const resetForm = () => {
+    setValues(initialFieldValues);
+    setErrors({});
+    setCurrentId(0);
+  };
+
   return {
     values,
     setValues,
     errors,
     setErrors,
     handleInputChange,
+    resetForm,
   };
 };
 
