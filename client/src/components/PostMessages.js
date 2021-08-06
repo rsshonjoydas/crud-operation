@@ -1,7 +1,8 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-alert */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
@@ -14,6 +15,8 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
+import { DeleteSweep } from '@material-ui/icons';
+import ButterToast, { Cinnamon } from 'butter-toast';
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/postMessage';
@@ -38,6 +41,24 @@ const PostMessages = ({ classes, ...props }) => {
   useEffect(() => {
     props.fetchAllPostMessages();
   }, []);
+
+  const onDelete = (id) => {
+    const onSuccess = () => {
+      ButterToast.raise({
+        content: (
+          <Cinnamon.Crisp
+            title="Post Box"
+            content="Deleted Successfully"
+            scheme={Cinnamon.Crisp.SCHEME_PURPLE}
+            icon={<DeleteSweep />}
+          />
+        ),
+      });
+    };
+    if (window.confirm('Are you sure to delete this record?')) {
+      props.deletePostMessage(id, onSuccess);
+    }
+  };
 
   return (
     <Grid container>
@@ -70,6 +91,7 @@ const PostMessages = ({ classes, ...props }) => {
                         color="secondary"
                         size="small"
                         className={classes.smMargin}
+                        onClick={() => onDelete(record._id)}
                       >
                         DELETE
                       </Button>
@@ -92,6 +114,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionToProps = {
   fetchAllPostMessages: actions.fetchAll,
+  deletePostMessage: actions.Delete,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(PostMessages));
