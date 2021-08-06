@@ -1,8 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
+  Button,
   Divider,
   Grid,
   List,
@@ -12,7 +14,7 @@ import {
   Typography,
   withStyles
 } from '@material-ui/core';
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/postMessage';
 import PostMessageForm from './PostMessageForm';
@@ -22,9 +24,17 @@ const styles = (theme) => ({
     margin: theme.spacing(3),
     padding: theme.spacing(2),
   },
+  smMargin: {
+    margin: theme.spacing(1),
+  },
+  actionDiv: {
+    textAlign: 'center',
+  },
 });
 
 const PostMessages = ({ classes, ...props }) => {
+  const [currentId, setCurrentId] = useState(0);
+
   useEffect(() => {
     props.fetchAllPostMessages();
   }, []);
@@ -33,7 +43,7 @@ const PostMessages = ({ classes, ...props }) => {
     <Grid container>
       <Grid item xs={5}>
         <Paper className={classes.paper}>
-          <PostMessageForm />
+          <PostMessageForm {...{ currentId, setCurrentId }} />
         </Paper>
       </Grid>
       <Grid item xs={7}>
@@ -45,6 +55,25 @@ const PostMessages = ({ classes, ...props }) => {
                   <ListItemText>
                     <Typography variant="h5">{record.title}</Typography>
                     <div>{record.message}</div>
+                    <div className={classes.actionDiv}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={classes.smMargin}
+                        onClick={() => setCurrentId(record._id)}
+                      >
+                        EDIT
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        className={classes.smMargin}
+                      >
+                        DELETE
+                      </Button>
+                    </div>
                   </ListItemText>
                 </ListItem>
                 <Divider component="li" />

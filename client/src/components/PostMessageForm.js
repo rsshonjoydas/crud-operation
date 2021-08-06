@@ -1,8 +1,11 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, TextField, withStyles } from '@material-ui/core';
 import { AssignmentTurnedIn } from '@material-ui/icons';
 import ButterToast, { Cinnamon } from 'butter-toast';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/postMessage';
 import useForm from './useForm';
@@ -29,7 +32,15 @@ const styles = (theme) => ({
 });
 
 const PostMessageForm = ({ classes, ...props }) => {
-  const { values, errors, setErrors, handleInputChange } = useForm(initialFieldValues);
+  const { values, setValues, errors, setErrors, handleInputChange } = useForm(initialFieldValues);
+
+  useEffect(() => {
+    if (props.currentId !== 0) {
+      setValues({
+        ...props.postMessageList.find((x) => x._id === props.currentId),
+      });
+    }
+  }, [props.currentId]);
 
   const validate = () => {
     const temp = { ...errors };
@@ -56,7 +67,12 @@ const PostMessageForm = ({ classes, ...props }) => {
       });
     };
     if (validate()) {
-      props.createPostMessage(values, onSuccess());
+      if (props.currentId === 0) {
+        props.createPostMessage(values, onSuccess());
+      } else {
+        props.updatePostMessage(props.currentId, values, onSuccess);
+        console.log('rs');
+      }
     }
   };
 
