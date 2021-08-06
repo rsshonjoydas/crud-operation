@@ -4,8 +4,8 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <p align="center">
-  <h3 align="center">MERN Stack CRUD Operation<>
-  <div align="center"><h3>Project Link: <a href="https://github.com/rsshonjoydas/crud-operation">GitHub</a> or <a href="https://codesandbox.io/s/crud-operation-b3l7g">CodeSandbox</a> & <a href="https://lively-satellite-605194.postman.co/workspace/MERN-Practice~6b134041-1638-456b-8ad2-f72897d12854/collection/16973119-b406973a-7c1a-4d93-8b05-822b16ae3014?ctx=documentation">Postman</a> </h3></div>
+  <h3 align="center">MERN Stack CRUD Operation
+  <div align="center"><h3>Project Link: <a href="https://github.com/rsshonjoydas/crud-operation">GitHub</a> or <a href="https://codesandbox.io/s/github/rsshonjoydas/crud-operation/tree/master/">CodeSandbox</a> & <a href="https://lively-satellite-605194.postman.co/workspace/MERN-Practice~6b134041-1638-456b-8ad2-f72897d12854/collection/16973119-b406973a-7c1a-4d93-8b05-822b16ae3014?ctx=documentation">Postman</a> </h3></div>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
